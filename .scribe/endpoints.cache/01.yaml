@@ -380,7 +380,7 @@ endpoints:
         custom: []
         name: name
         description: 'Primary contact or display name for the client. Must not be greater than 255 characters.'
-        required: true
+        required: false
         example: 'Grace Hopper'
         type: string
         enumValues: []
@@ -402,7 +402,7 @@ endpoints:
         custom: []
         name: email
         description: 'Unique (per customer) contact email for the client. Must be a valid email address. Must not be greater than 255 characters.'
-        required: true
+        required: false
         example: grace@hopper.test
         type: string
         enumValues: []
@@ -424,7 +424,7 @@ endpoints:
         custom: []
         name: status
         description: 'Lifecycle status. One of `lead`, `active`, `inactive`.'
-        required: true
+        required: false
         example: active
         type: string
         enumValues:

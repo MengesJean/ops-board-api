@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Client\IndexClientRequest;
 use App\Http\Requests\Client\StoreClientRequest;
 use App\Http\Requests\Client\UpdateClientRequest;
-use App\Http\Resources\ClientResource;
+use App\Http\Resources\Client\ClientResource;
 use App\Models\Client;
 use App\Models\Customer;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -60,14 +60,15 @@ class ClientController extends Controller
 
         $clients = $customer->clients()
             ->when($request->string('search')->toString(), function ($query, string $search): void {
-                $query->where(function ($inner) use ($search): void {
-                    $inner->where('name', 'like', "%{$search}%")
-                        ->orWhere('company_name', 'like', "%{$search}%");
+                $needle = '%'.strtolower($search).'%';
+                $query->where(function ($inner) use ($needle): void {
+                    $inner->whereRaw('LOWER(name) LIKE ?', [$needle])
+                        ->orWhereRaw('LOWER(company_name) LIKE ?', [$needle]);
                 });
             })
             ->when($request->string('status')->toString(), fn ($query, string $status) => $query->where('status', $status))
             ->latest('id')
-            ->paginate($request->integer('per_page') ?: 15)
+            ->paginate($request->integer('per_page', 15))
             ->withQueryString();
 
         return ClientResource::collection($clients);

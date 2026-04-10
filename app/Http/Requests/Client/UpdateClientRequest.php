@@ -14,9 +14,10 @@ class UpdateClientRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'company_name' => ['nullable', 'string', 'max:255'],
+            'name' => ['sometimes', 'required', 'string', 'max:255'],
+            'company_name' => ['sometimes', 'nullable', 'string', 'max:255'],
             'email' => [
+                'sometimes',
                 'required',
                 'email',
                 'max:255',
@@ -24,9 +25,9 @@ class UpdateClientRequest extends FormRequest
                     ->where(fn ($query) => $query->where('customer_id', $this->user()?->id))
                     ->ignore($this->route('client')?->id),
             ],
-            'phone' => ['nullable', 'string', 'max:50'],
-            'status' => ['required', Rule::enum(ClientStatus::class)],
-            'notes' => ['nullable', 'string', 'max:5000'],
+            'phone' => ['sometimes', 'nullable', 'string', 'max:50'],
+            'status' => ['sometimes', 'required', Rule::enum(ClientStatus::class)],
+            'notes' => ['sometimes', 'nullable', 'string', 'max:5000'],
         ];
     }
 
