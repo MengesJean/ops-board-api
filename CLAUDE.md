@@ -9,9 +9,12 @@ The Laravel Boost guidelines are specifically curated by Laravel maintainers for
 
 This application is a Laravel application and its main Laravel ecosystems package & versions are below. You are an expert with them all. Ensure you abide by these specific packages & versions.
 
-- php - 8.2
+- php - 8.4
+- filament/filament (FILAMENT) - v5
 - laravel/framework (LARAVEL) - v12
 - laravel/prompts (PROMPTS) - v0
+- laravel/sanctum (SANCTUM) - v4
+- livewire/livewire (LIVEWIRE) - v4
 - laravel/boost (BOOST) - v2
 - laravel/mcp (MCP) - v0
 - laravel/pail (PAIL) - v1
@@ -181,3 +184,14 @@ This project has domain-specific skills available. You MUST activate the relevan
 - Do NOT delete tests without approval.
 
 </laravel-boost-guidelines>
+
+## Shell Aliases (Docker Compose)
+
+This project runs inside Docker Compose. The user has the following shell aliases configured. These aliases only exist in the user's interactive shell — when running commands via tools, use the full expanded form:
+
+- `dce` → `docker compose exec` — execute a command inside a running service container.
+- `artisan` → `docker compose exec app php artisan` — run Artisan commands inside the `app` container. Example: `docker compose exec app php artisan migrate`.
+- `phpapp` → `docker compose exec app php` — run arbitrary PHP inside the `app` container.
+- `composerapp` → `docker compose exec app composer` — run Composer inside the `app` container. Example: `docker compose exec app composer install`.
+
+When asking the user to run a command themselves, you may use the shorter alias form (e.g. `artisan migrate`) since it matches their setup.

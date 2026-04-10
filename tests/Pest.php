@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
+
 /*
 |--------------------------------------------------------------------------
 | Test Case
@@ -11,8 +14,13 @@
 |
 */
 
-pest()->extend(Tests\TestCase::class)
- // ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
+pest()->extend(TestCase::class)
+    ->use(RefreshDatabase::class)
+    ->beforeEach(function () {
+        // Make feature tests behave like requests coming from the first-party
+        // SPA so Sanctum's stateful middleware engages (session cookie auth).
+        $this->withHeaders(['Origin' => config('app.url')]);
+    })
     ->in('Feature');
 
 /*

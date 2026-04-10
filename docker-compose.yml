@@ -28,7 +28,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.docker.network=proxy
-      - traefik.http.routers.laravel.rule=Host(`api-ops-board.dev.localhost`)
+      - traefik.http.routers.laravel.rule=Host(`api.ops-board.dev.localhost`)
       - traefik.http.routers.laravel.entrypoints=websecure
       - traefik.http.routers.laravel.tls=true
       - traefik.http.services.laravel.loadbalancer.server.port=80
