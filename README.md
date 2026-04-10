@@ -1,59 +1,139 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Ops Board — API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Backend Laravel 12 du projet **Ops Board**. Expose une API REST consommée par le front Next.js (`app.ops-board.dev.localhost`) et un panneau d'administration Filament.
 
-## About Laravel
+## Stack
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **PHP 8.4** / **Laravel 12**
+- **Filament 5** — back-office admin
+- **Sanctum 4** — authentification SPA (cookies de session) pour le front Next.js
+- **Pest 3** — tests
+- **Scribe** — documentation API auto-générée
+- **PostgreSQL 18** — base de données
+- **Docker Compose + Traefik** — environnement local
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Architecture
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- `app/Http/Controllers/Api/` — controllers REST (single-action invokables)
+- `app/Http/Requests/` — Form Requests + `bodyParameters()` pour Scribe
+- `app/Http/Resources/` — API Resources
+- `app/Filament/` — ressources Filament pour l'admin
+- `routes/api.php` — routes API montées sur `api/*`
+- `bootstrap/app.php` — middleware (`statefulApi()` activé pour Sanctum SPA)
 
-## Learning Laravel
+L'auth client utilise le pattern **Sanctum SPA** : sessions via cookies partagés sur le domaine parent `.ops-board.dev.localhost`. Le front et l'API doivent vivre sur des sous-domaines de cette racine pour que le cookie de session soit partagé.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## Démarrage
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Le projet tourne dans Docker Compose, derrière un reverse-proxy Traefik externe.
 
-## Laravel Sponsors
+### Prérequis
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- Docker + Docker Compose
+- Un network Docker `proxy` partagé avec Traefik (créé une fois : `docker network create proxy`)
+- Traefik configuré pour servir `*.dev.localhost` en HTTPS (certificats auto-signés acceptés)
 
-### Premium Partners
+### Installation
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+```bash
+cp .env.example .env
+docker compose up -d
+docker compose exec app composer install
+docker compose exec app php artisan key:generate
+docker compose exec app php artisan migrate --seed
+```
 
-## Contributing
+L'API est ensuite disponible sur **https://api.ops-board.dev.localhost**.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Aliases shell utiles
 
-## Code of Conduct
+```bash
+alias dce='docker compose exec'
+alias artisan='docker compose exec app php artisan'
+alias composerapp='docker compose exec app composer'
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Authentification
 
-## Security Vulnerabilities
+Auth Sanctum SPA pour `app.ops-board.dev.localhost` :
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+| Variable | Valeur |
+|---|---|
+| `SESSION_DOMAIN` | `.ops-board.dev.localhost` |
+| `SESSION_SAME_SITE` | `lax` |
+| `SESSION_SECURE_COOKIE` | `true` |
+| `SANCTUM_STATEFUL_DOMAINS` | `app.ops-board.dev.localhost` |
+| `CORS_ALLOWED_ORIGINS` | `https://app.ops-board.dev.localhost` |
 
-## License
+Côté front, avant toute requête mutante :
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+1. `GET https://api.ops-board.dev.localhost/sanctum/csrf-cookie` (avec `credentials: 'include'`)
+2. Envoyer les requêtes suivantes avec `credentials: 'include'` et le header `X-XSRF-TOKEN` (axios le fait automatiquement)
+
+### Endpoints d'auth
+
+| Méthode | URI | Description |
+|---|---|---|
+| `POST` | `/api/register` | Crée un customer et ouvre une session |
+| `POST` | `/api/login` | Authentifie un customer existant |
+| `GET` | `/api/me` | Retourne le customer connecté |
+| `POST` | `/api/logout` | Termine la session |
+
+## Documentation API
+
+Générée par Scribe :
+
+```bash
+artisan scribe:generate
+```
+
+Disponible sur **https://api.ops-board.dev.localhost/docs**.
+
+## Admin Filament
+
+Panneau admin sur **https://api.ops-board.dev.localhost/admin**. Le seeder `AdminUserSeeder` provisionne un compte admin par défaut (voir `database/seeders/AdminUserSeeder.php`).
+
+## Tests
+
+```bash
+artisan test           # tous les tests
+artisan test --compact # sortie condensée
+artisan test --filter=Auth
+```
+
+Les tests utilisent Pest 3 + `RefreshDatabase`. La base de test est configurée dans `phpunit.xml`.
+
+## Qualité de code
+
+```bash
+docker compose exec app vendor/bin/pint --dirty   # formatage
+```
+
+Pint est configuré au preset Laravel.
+
+## Structure des fichiers clés
+
+```
+api/
+├── app/
+│   ├── Filament/                 # Ressources admin
+│   ├── Http/
+│   │   ├── Controllers/Api/      # Controllers REST
+│   │   ├── Requests/             # Form Requests
+│   │   └── Resources/            # API Resources
+│   └── Models/
+├── bootstrap/app.php             # Middleware + routing
+├── config/
+│   ├── cors.php
+│   └── sanctum.php
+├── database/
+│   ├── factories/
+│   ├── migrations/
+│   └── seeders/
+├── routes/
+│   ├── api.php
+│   └── web.php
+└── tests/
+    ├── Feature/
+    └── Unit/
+```

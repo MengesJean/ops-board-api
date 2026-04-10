@@ -1,0 +1,298 @@
+name: 'Customer Authentication'
+description: ''
+endpoints:
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/register
+    metadata:
+      custom: []
+      groupName: 'Customer Authentication'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Register a new customer.'
+      description: |-
+        Creates a new customer account and immediately starts a session for them
+        via the `customer` guard. Subsequent requests from the SPA will be
+        authenticated via the session cookie set on this response.
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        custom: []
+        name: name
+        description: 'Full display name of the customer. Must not be greater than 255 characters.'
+        required: true
+        example: 'Ada Lovelace'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      email:
+        custom: []
+        name: email
+        description: 'Unique email address used as the account identifier. Must be a valid email address. Must not be greater than 255 characters.'
+        required: true
+        example: ada@example.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      password:
+        custom: []
+        name: password
+        description: 'Plain-text password. Must satisfy the default Laravel password policy.'
+        required: true
+        example: correct-horse-battery-staple
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      password_confirmation:
+        custom: []
+        name: password_confirmation
+        description: 'Must match `password`.'
+        required: true
+        example: correct-horse-battery-staple
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      name: 'Ada Lovelace'
+      email: ada@example.com
+      password: correct-horse-battery-staple
+      password_confirmation: correct-horse-battery-staple
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 201
+        content: |-
+          {
+            "data": {
+              "id": 1,
+              "name": "Ada Lovelace",
+              "email": "ada@example.com",
+              "email_verified_at": null,
+              "created_at": "2026-04-10T12:00:00+00:00"
+            }
+          }
+        headers: []
+        description: 'Account created'
+      -
+        custom: []
+        status: 422
+        content: |-
+          {
+            "message": "The email has already been taken.",
+            "errors": {"email": ["The email has already been taken."]}
+          }
+        headers: []
+        description: 'Validation failed'
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/login
+    metadata:
+      custom: []
+      groupName: 'Customer Authentication'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Log a customer in.'
+      description: |-
+        Authenticates a customer against the `customer` guard using their
+        email + password. On success, a session cookie is set and subsequent
+        requests to protected endpoints will be authenticated via `auth:sanctum`.
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      email:
+        custom: []
+        name: email
+        description: 'The email the customer registered with. Must be a valid email address.'
+        required: true
+        example: ada@example.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      password:
+        custom: []
+        name: password
+        description: 'The customer password.'
+        required: true
+        example: correct-horse-battery-staple
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      email: ada@example.com
+      password: correct-horse-battery-staple
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "data": {
+              "id": 1,
+              "name": "Ada Lovelace",
+              "email": "ada@example.com",
+              "email_verified_at": null,
+              "created_at": "2026-04-10T12:00:00+00:00"
+            }
+          }
+        headers: []
+        description: Authenticated
+      -
+        custom: []
+        status: 422
+        content: |-
+          {
+            "message": "These credentials do not match our records.",
+            "errors": {"email": ["These credentials do not match our records."]}
+          }
+        headers: []
+        description: 'Bad credentials'
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/me
+    metadata:
+      custom: []
+      groupName: 'Customer Authentication'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get the authenticated customer.'
+      description: |-
+        Returns the currently authenticated customer's profile. Useful for the
+        SPA to bootstrap its auth state on page load.
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {session-cookie}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "data": {
+              "id": 1,
+              "name": "Ada Lovelace",
+              "email": "ada@example.com",
+              "email_verified_at": null,
+              "created_at": "2026-04-10T12:00:00+00:00"
+            }
+          }
+        headers: []
+        description: Authenticated
+      -
+        custom: []
+        status: 401
+        content: |-
+          {
+            "message": "Unauthenticated."
+          }
+        headers: []
+        description: Unauthenticated
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/logout
+    metadata:
+      custom: []
+      groupName: 'Customer Authentication'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Log the current customer out.'
+      description: |-
+        Terminates the session on the server side, invalidates the session
+        cookie and rotates the CSRF token. Call this from the SPA when the
+        user signs out.
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {session-cookie}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 204
+        content: ''
+        headers: []
+        description: 'Logged out'
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
