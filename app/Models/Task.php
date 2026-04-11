@@ -2,28 +2,30 @@
 
 namespace App\Models;
 
-use App\Enums\MilestoneStatus;
-use Database\Factories\ProjectMilestoneFactory;
+use App\Enums\TaskPriority;
+use App\Enums\TaskStatus;
+use Database\Factories\TaskFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class ProjectMilestone extends Model
+class Task extends Model
 {
-    /** @use HasFactory<ProjectMilestoneFactory> */
+    /** @use HasFactory<TaskFactory> */
     use HasFactory;
 
-    protected $table = 'project_milestone';
+    protected $table = 'task';
 
     /**
      * @var list<string>
      */
     protected $fillable = [
         'project_id',
+        'project_milestone_id',
         'title',
         'description',
         'status',
+        'priority',
         'due_date',
     ];
 
@@ -36,11 +38,11 @@ class ProjectMilestone extends Model
     }
 
     /**
-     * @return HasMany<Task, $this>
+     * @return BelongsTo<ProjectMilestone, $this>
      */
-    public function tasks(): HasMany
+    public function milestone(): BelongsTo
     {
-        return $this->hasMany(Task::class)->orderBy('position')->orderBy('id');
+        return $this->belongsTo(ProjectMilestone::class, 'project_milestone_id');
     }
 
     /**
@@ -49,7 +51,8 @@ class ProjectMilestone extends Model
     protected function casts(): array
     {
         return [
-            'status' => MilestoneStatus::class,
+            'status' => TaskStatus::class,
+            'priority' => TaskPriority::class,
             'due_date' => 'date',
             'completed_at' => 'datetime',
         ];
@@ -59,10 +62,10 @@ class ProjectMilestone extends Model
     {
         // Auto-assign position on creation: max(position) + 1 for the project,
         // unless an explicit position was already set (e.g. via seeders).
-        static::creating(function (self $milestone): void {
-            if ($milestone->position === null) {
-                $milestone->position = (int) static::query()
-                    ->where('project_id', $milestone->project_id)
+        static::creating(function (self $task): void {
+            if ($task->position === null) {
+                $task->position = (int) static::query()
+                    ->where('project_id', $task->project_id)
                     ->max('position') + 1;
             }
         });
@@ -71,20 +74,20 @@ class ProjectMilestone extends Model
         //  - entering `done` stamps the column when it is null;
         //  - leaving `done` clears the column.
         // Centralised here so the API, Filament, and seeders all behave the same.
-        static::saving(function (self $milestone): void {
-            if (! $milestone->isDirty('status')) {
+        static::saving(function (self $task): void {
+            if (! $task->isDirty('status')) {
                 return;
             }
 
-            if ($milestone->status === MilestoneStatus::Done) {
-                if ($milestone->completed_at === null) {
-                    $milestone->completed_at = now();
+            if ($task->status === TaskStatus::Done) {
+                if ($task->completed_at === null) {
+                    $task->completed_at = now();
                 }
 
                 return;
             }
 
-            $milestone->completed_at = null;
+            $task->completed_at = null;
         });
     }
 }

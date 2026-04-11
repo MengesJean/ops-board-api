@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\Clients\ClientController;
 use App\Http\Controllers\Api\ProjectMilestones\ProjectMilestoneController;
 use App\Http\Controllers\Api\Projects\ProjectController;
+use App\Http\Controllers\Api\Tasks\TaskController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('register', RegisterController::class)->name('customer.register');
@@ -27,4 +28,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('projects.milestones', ProjectMilestoneController::class)
         ->parameters(['milestones' => 'milestone'])
         ->scoped(['milestone' => 'id']);
+
+    // The reorder route is declared *before* the apiResource so that the
+    // literal `reorder` segment is not captured as a {task} parameter.
+    Route::patch('projects/{project}/tasks/reorder', [TaskController::class, 'reorder'])
+        ->name('projects.tasks.reorder');
+
+    Route::apiResource('projects.tasks', TaskController::class)
+        ->parameters(['tasks' => 'task'])
+        ->scoped(['task' => 'id']);
 });
