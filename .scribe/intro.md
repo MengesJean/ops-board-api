@@ -3,7 +3,7 @@
 Public HTTP API powering the OpsBoard application front-end.
 
 <aside>
-    <strong>Base URL</strong>: <code>http://localhost</code>
+    <strong>Base URL</strong>: <code>https://api.ops-board.dev.localhost</code>
 </aside>
 
     This documentation describes the HTTP endpoints exposed by the OpsBoard

@@ -60,4 +60,12 @@ class Customer extends Authenticatable
     {
         return $this->hasManyThrough(Project::class, Client::class);
     }
+
+    /**
+     * @return HasMany<ActivityLog, $this>
+     */
+    public function activityLogs(): HasMany
+    {
+        return $this->hasMany(ActivityLog::class);
+    }
 }

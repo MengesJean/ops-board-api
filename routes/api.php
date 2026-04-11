@@ -5,8 +5,11 @@ use App\Http\Controllers\Api\Auth\LogoutController;
 use App\Http\Controllers\Api\Auth\MeController;
 use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\Clients\ClientController;
+use App\Http\Controllers\Api\Dashboard\DashboardController;
 use App\Http\Controllers\Api\ProjectMilestones\ProjectMilestoneController;
+use App\Http\Controllers\Api\Projects\ProjectActivityController;
 use App\Http\Controllers\Api\Projects\ProjectController;
+use App\Http\Controllers\Api\Projects\ProjectProgressController;
 use App\Http\Controllers\Api\Tasks\TaskController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,7 +20,18 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('me', MeController::class)->name('customer.me');
     Route::post('logout', LogoutController::class)->name('customer.logout');
 
+    Route::get('dashboard', DashboardController::class)->name('dashboard');
+
     Route::apiResource('clients', ClientController::class);
+
+    // Pilotage endpoints (progression + activity timeline). Declared *before*
+    // the projects apiResource so the literal `progress` / `activity` segments
+    // are never mistaken for a {project} model binding identifier.
+    Route::get('projects/{project}/progress', ProjectProgressController::class)
+        ->name('projects.progress');
+    Route::get('projects/{project}/activity', ProjectActivityController::class)
+        ->name('projects.activity');
+
     Route::apiResource('projects', ProjectController::class);
 
     // The reorder route is declared *before* the apiResource so that the

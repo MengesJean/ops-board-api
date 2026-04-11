@@ -107,6 +107,26 @@
                             </li>
                                                                         </ul>
                             </ul>
+                    <ul id="tocify-header-dashboard" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="dashboard">
+                    <a href="#dashboard">Dashboard</a>
+                </li>
+                                    <ul id="tocify-subheader-dashboard" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="dashboard-GETapi-dashboard">
+                                <a href="#dashboard-GETapi-dashboard">Get the dashboard payload.</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
+                    <ul id="tocify-header-project-activity" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="project-activity">
+                    <a href="#project-activity">Project Activity</a>
+                </li>
+                                    <ul id="tocify-subheader-project-activity" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="project-activity-GETapi-projects--project_id--activity">
+                                <a href="#project-activity-GETapi-projects--project_id--activity">List the activity for a project.</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
                     <ul id="tocify-header-project-management" class="tocify-header">
                 <li class="tocify-item level-1" data-unique="project-management">
                     <a href="#project-management">Project Management</a>
@@ -151,6 +171,16 @@
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="project-milestones-DELETEapi-projects--project_id--milestones--id-">
                                 <a href="#project-milestones-DELETEapi-projects--project_id--milestones--id-">Delete a milestone.</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
+                    <ul id="tocify-header-project-progress" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="project-progress">
+                    <a href="#project-progress">Project Progress</a>
+                </li>
+                                    <ul id="tocify-subheader-project-progress" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="project-progress-GETapi-projects--project_id--progress">
+                                <a href="#project-progress-GETapi-projects--project_id--progress">Get the project's progression.</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -1890,6 +1920,421 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                         </form>
 
+                <h1 id="dashboard">Dashboard</h1>
+
+    <p>Aggregated read model powering the OpsBoard front-end dashboard. The
+payload is built in <code>DashboardService</code> and bundles project &amp; task stats,
+priority lists (overdue tasks, upcoming milestones, at-risk projects), a
+synthetic projects view, and the customer's recent activity feed — in a
+single response so the front does not need to fan out multiple calls.</p>
+<p>Ownership is enforced inside the service: every read is scoped to the
+authenticated customer's id, so no policy is needed at the route level.</p>
+
+                                <h2 id="dashboard-GETapi-dashboard">Get the dashboard payload.</h2>
+
+<p>
+</p>
+
+<p>Returns a stable, structured object containing the four sections the
+front needs to render the dashboard page in one shot:
+<code>stats</code>, <code>priorities</code>, <code>projects</code>, and <code>recent_activity</code>.</p>
+
+<span id="example-requests-GETapi-dashboard">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://api.ops-board.dev.localhost/api/dashboard" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://api.ops-board.dev.localhost/api/dashboard"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-dashboard">
+            <blockquote>
+            <p>Example response (200, OK):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: {
+        &quot;stats&quot;: {
+            &quot;active_projects_count&quot;: 3,
+            &quot;completed_projects_count&quot;: 1,
+            &quot;warning_projects_count&quot;: 1,
+            &quot;critical_projects_count&quot;: 0,
+            &quot;overdue_tasks_count&quot;: 2,
+            &quot;due_today_tasks_count&quot;: 1,
+            &quot;upcoming_milestones_count&quot;: 1,
+            &quot;global_completion_rate&quot;: 0.42
+        },
+        &quot;priorities&quot;: {
+            &quot;overdue_tasks&quot;: [],
+            &quot;due_today_tasks&quot;: [],
+            &quot;upcoming_milestones&quot;: [],
+            &quot;at_risk_projects&quot;: []
+        },
+        &quot;projects&quot;: [],
+        &quot;recent_activity&quot;: []
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Guest):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-dashboard" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-dashboard"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-dashboard"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-dashboard" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-dashboard">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-dashboard" data-method="GET"
+      data-path="api/dashboard"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-dashboard', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-dashboard"
+                    onclick="tryItOut('GETapi-dashboard');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-dashboard"
+                    onclick="cancelTryOut('GETapi-dashboard');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-dashboard"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/dashboard</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-dashboard"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-dashboard"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                <h1 id="project-activity">Project Activity</h1>
+
+    <p>Read-only timeline of business events that happened on a project. Events
+are recorded by model observers (Project / ProjectMilestone / Task) and
+stored in the singular <code>activity_log</code> table, scoped to the owning customer
+via a denormalised <code>customer_id</code>.</p>
+<p>The full ownership chain <code>Customer → Client → Project</code> is enforced via the
+existing <code>ProjectPolicy</code>.</p>
+
+                                <h2 id="project-activity-GETapi-projects--project_id--activity">List the activity for a project.</h2>
+
+<p>
+</p>
+
+<p>Returns a paginated, descending-by-date timeline of every recorded
+business event tied to the project (status changes, completions,
+milestone attach/detach, deletions…). The page size defaults to 20 and
+can be tuned via the <code>per_page</code> query parameter (max 100).</p>
+
+<span id="example-requests-GETapi-projects--project_id--activity">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://api.ops-board.dev.localhost/api/projects/1/activity?per_page=20" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://api.ops-board.dev.localhost/api/projects/1/activity"
+);
+
+const params = {
+    "per_page": "20",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-projects--project_id--activity">
+            <blockquote>
+            <p>Example response (200, OK):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 42,
+            &quot;event&quot;: &quot;task.completed&quot;,
+            &quot;subject&quot;: {
+                &quot;type&quot;: &quot;task&quot;,
+                &quot;id&quot;: 7,
+                &quot;label&quot;: &quot;Validate hero copy&quot;
+            },
+            &quot;project_id&quot;: 1,
+            &quot;actor&quot;: {
+                &quot;type&quot;: &quot;customer&quot;,
+                &quot;id&quot;: 3,
+                &quot;name&quot;: &quot;Grace Hopper&quot;
+            },
+            &quot;properties&quot;: {
+                &quot;label&quot;: &quot;Validate hero copy&quot;
+            },
+            &quot;created_at&quot;: &quot;2026-06-19T17:00:00+00:00&quot;
+        },
+        {
+            &quot;id&quot;: 41,
+            &quot;event&quot;: &quot;task.status_changed&quot;,
+            &quot;subject&quot;: {
+                &quot;type&quot;: &quot;task&quot;,
+                &quot;id&quot;: 7,
+                &quot;label&quot;: &quot;Validate hero copy&quot;
+            },
+            &quot;project_id&quot;: 1,
+            &quot;actor&quot;: {
+                &quot;type&quot;: &quot;customer&quot;,
+                &quot;id&quot;: 3,
+                &quot;name&quot;: &quot;Grace Hopper&quot;
+            },
+            &quot;properties&quot;: {
+                &quot;label&quot;: &quot;Validate hero copy&quot;,
+                &quot;from&quot;: &quot;in_progress&quot;,
+                &quot;to&quot;: &quot;done&quot;
+            },
+            &quot;created_at&quot;: &quot;2026-06-19T17:00:00+00:00&quot;
+        }
+    ],
+    &quot;links&quot;: {
+        &quot;first&quot;: &quot;...&quot;,
+        &quot;last&quot;: &quot;...&quot;,
+        &quot;prev&quot;: null,
+        &quot;next&quot;: null
+    },
+    &quot;meta&quot;: {
+        &quot;current_page&quot;: 1,
+        &quot;per_page&quot;: 20,
+        &quot;total&quot;: 42
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Guest):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403, Project not owned by caller):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;This action is unauthorized.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, Project not found):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;No query results for model [App\\Models\\Project].&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-projects--project_id--activity" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-projects--project_id--activity"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-projects--project_id--activity"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-projects--project_id--activity" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-projects--project_id--activity">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-projects--project_id--activity" data-method="GET"
+      data-path="api/projects/{project_id}/activity"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-projects--project_id--activity', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-projects--project_id--activity"
+                    onclick="tryItOut('GETapi-projects--project_id--activity');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-projects--project_id--activity"
+                    onclick="cancelTryOut('GETapi-projects--project_id--activity');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-projects--project_id--activity"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/projects/{project_id}/activity</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-projects--project_id--activity"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-projects--project_id--activity"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>project_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="project_id"                data-endpoint="GETapi-projects--project_id--activity"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the project. Example: <code>1</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>project</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="project"                data-endpoint="GETapi-projects--project_id--activity"
+               value="1"
+               data-component="url">
+    <br>
+<p>The project ID. Example: <code>1</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>per_page</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="per_page"                data-endpoint="GETapi-projects--project_id--activity"
+               value="20"
+               data-component="query">
+    <br>
+<p>Items per page (max 100). Example: <code>20</code></p>
+            </div>
+                </form>
+
                 <h1 id="project-management">Project Management</h1>
 
     <p>APIs for managing projects belonging to clients owned by the authenticated
@@ -2533,14 +2978,14 @@ customer's clients, including a minimal client summary.</p>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://api.ops-board.dev.localhost/api/projects/2" \
+    --get "https://api.ops-board.dev.localhost/api/projects/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://api.ops-board.dev.localhost/api/projects/2"
+    "https://api.ops-board.dev.localhost/api/projects/1"
 );
 
 const headers = {
@@ -2684,10 +3129,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="GETapi-projects--id-"
-               value="2"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the project. Example: <code>2</code></p>
+<p>The ID of the project. Example: <code>1</code></p>
             </div>
                     </form>
 
@@ -2706,7 +3151,7 @@ blocked at validation time (422), not at the policy layer.</p>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "https://api.ops-board.dev.localhost/api/projects/2" \
+    "https://api.ops-board.dev.localhost/api/projects/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -2727,7 +3172,7 @@ blocked at validation time (422), not at the policy layer.</p>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://api.ops-board.dev.localhost/api/projects/2"
+    "https://api.ops-board.dev.localhost/api/projects/1"
 );
 
 const headers = {
@@ -2894,10 +3339,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="PUTapi-projects--id-"
-               value="2"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the project. Example: <code>2</code></p>
+<p>The ID of the project. Example: <code>1</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -3054,14 +3499,14 @@ customer's clients.</p>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "https://api.ops-board.dev.localhost/api/projects/2" \
+    "https://api.ops-board.dev.localhost/api/projects/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://api.ops-board.dev.localhost/api/projects/2"
+    "https://api.ops-board.dev.localhost/api/projects/1"
 );
 
 const headers = {
@@ -3173,10 +3618,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="DELETEapi-projects--id-"
-               value="2"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the project. Example: <code>2</code></p>
+<p>The ID of the project. Example: <code>1</code></p>
             </div>
                     </form>
 
@@ -3207,7 +3652,7 @@ inside a transaction.</p>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PATCH \
-    "https://api.ops-board.dev.localhost/api/projects/2/milestones/reorder" \
+    "https://api.ops-board.dev.localhost/api/projects/1/milestones/reorder" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -3220,7 +3665,7 @@ inside a transaction.</p>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://api.ops-board.dev.localhost/api/projects/2/milestones/reorder"
+    "https://api.ops-board.dev.localhost/api/projects/1/milestones/reorder"
 );
 
 const headers = {
@@ -3380,10 +3825,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="project_id"                data-endpoint="PATCHapi-projects--project_id--milestones-reorder"
-               value="2"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the project. Example: <code>2</code></p>
+<p>The ID of the project. Example: <code>1</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>project</code></b>&nbsp;&nbsp;
@@ -3429,14 +3874,14 @@ whole list at once. Results are ordered by <code>position</code>.</p>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://api.ops-board.dev.localhost/api/projects/2/milestones" \
+    --get "https://api.ops-board.dev.localhost/api/projects/1/milestones" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://api.ops-board.dev.localhost/api/projects/2/milestones"
+    "https://api.ops-board.dev.localhost/api/projects/1/milestones"
 );
 
 const headers = {
@@ -3594,10 +4039,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="project_id"                data-endpoint="GETapi-projects--project_id--milestones"
-               value="2"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the project. Example: <code>2</code></p>
+<p>The ID of the project. Example: <code>1</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>project</code></b>&nbsp;&nbsp;
@@ -3629,7 +4074,7 @@ settable from the payload. Setting <code>status</code> to <code>done</code> imme
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://api.ops-board.dev.localhost/api/projects/2/milestones" \
+    "https://api.ops-board.dev.localhost/api/projects/1/milestones" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -3643,7 +4088,7 @@ settable from the payload. Setting <code>status</code> to <code>done</code> imme
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://api.ops-board.dev.localhost/api/projects/2/milestones"
+    "https://api.ops-board.dev.localhost/api/projects/1/milestones"
 );
 
 const headers = {
@@ -3790,10 +4235,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="project_id"                data-endpoint="POSTapi-projects--project_id--milestones"
-               value="2"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the project. Example: <code>2</code></p>
+<p>The ID of the project. Example: <code>1</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>project</code></b>&nbsp;&nbsp;
@@ -3875,14 +4320,14 @@ milestone does not belong to the project in the path.</p>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://api.ops-board.dev.localhost/api/projects/2/milestones/1" \
+    --get "https://api.ops-board.dev.localhost/api/projects/1/milestones/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://api.ops-board.dev.localhost/api/projects/2/milestones/1"
+    "https://api.ops-board.dev.localhost/api/projects/1/milestones/1"
 );
 
 const headers = {
@@ -4017,10 +4462,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="project_id"                data-endpoint="GETapi-projects--project_id--milestones--id-"
-               value="2"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the project. Example: <code>2</code></p>
+<p>The ID of the project. Example: <code>1</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
@@ -4075,7 +4520,7 @@ clears it. The model handles this automatically.</p>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "https://api.ops-board.dev.localhost/api/projects/2/milestones/1" \
+    "https://api.ops-board.dev.localhost/api/projects/1/milestones/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -4089,7 +4534,7 @@ clears it. The model handles this automatically.</p>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://api.ops-board.dev.localhost/api/projects/2/milestones/1"
+    "https://api.ops-board.dev.localhost/api/projects/1/milestones/1"
 );
 
 const headers = {
@@ -4226,10 +4671,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="project_id"                data-endpoint="PUTapi-projects--project_id--milestones--id-"
-               value="2"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the project. Example: <code>2</code></p>
+<p>The ID of the project. Example: <code>1</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
@@ -4335,14 +4780,14 @@ create call handles ordering correctly.</p>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "https://api.ops-board.dev.localhost/api/projects/2/milestones/1" \
+    "https://api.ops-board.dev.localhost/api/projects/1/milestones/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://api.ops-board.dev.localhost/api/projects/2/milestones/1"
+    "https://api.ops-board.dev.localhost/api/projects/1/milestones/1"
 );
 
 const headers = {
@@ -4454,10 +4899,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="project_id"                data-endpoint="DELETEapi-projects--project_id--milestones--id-"
-               value="2"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the project. Example: <code>2</code></p>
+<p>The ID of the project. Example: <code>1</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
@@ -4497,6 +4942,235 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                     </form>
 
+                <h1 id="project-progress">Project Progress</h1>
+
+    <p>Read-only progression endpoint for a project. Computes a snapshot from the
+project's tasks (source of truth) and milestones, and returns it alongside a
+per-milestone breakdown so the front-end can render a roadmap with visual
+progress without firing additional requests.</p>
+<p>The full ownership chain <code>Customer → Client → Project</code> is enforced via the
+existing <code>ProjectPolicy</code>.</p>
+
+                                <h2 id="project-progress-GETapi-projects--project_id--progress">Get the project&#039;s progression.</h2>
+
+<p>
+</p>
+
+<p>Returns global task/milestone counts, the next-due task and milestone,
+an <code>is_overdue</code> flag, and a milestone-by-milestone task breakdown.</p>
+
+<span id="example-requests-GETapi-projects--project_id--progress">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://api.ops-board.dev.localhost/api/projects/1/progress" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://api.ops-board.dev.localhost/api/projects/1/progress"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-projects--project_id--progress">
+            <blockquote>
+            <p>Example response (200, OK):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: {
+        &quot;project&quot;: {
+            &quot;total_tasks&quot;: 12,
+            &quot;todo_tasks&quot;: 4,
+            &quot;in_progress_tasks&quot;: 3,
+            &quot;completed_tasks&quot;: 5,
+            &quot;overdue_tasks&quot;: 1,
+            &quot;completion_rate&quot;: 0.4167,
+            &quot;has_tasks&quot;: true,
+            &quot;total_milestones&quot;: 4,
+            &quot;completed_milestones&quot;: 1,
+            &quot;next_due_task&quot;: {
+                &quot;id&quot;: 7,
+                &quot;title&quot;: &quot;Validate hero copy&quot;,
+                &quot;due_date&quot;: &quot;2026-05-15&quot;
+            },
+            &quot;next_due_milestone&quot;: {
+                &quot;id&quot;: 2,
+                &quot;title&quot;: &quot;Design ready&quot;,
+                &quot;due_date&quot;: &quot;2026-06-20&quot;
+            },
+            &quot;is_overdue&quot;: false
+        },
+        &quot;milestones&quot;: [
+            {
+                &quot;id&quot;: 1,
+                &quot;title&quot;: &quot;Discovery&quot;,
+                &quot;status&quot;: &quot;done&quot;,
+                &quot;position&quot;: 1,
+                &quot;due_date&quot;: &quot;2026-05-15&quot;,
+                &quot;completed_at&quot;: &quot;2026-05-14T16:30:00+00:00&quot;,
+                &quot;total_tasks&quot;: 4,
+                &quot;completed_tasks&quot;: 4,
+                &quot;completion_rate&quot;: 1
+            },
+            {
+                &quot;id&quot;: 2,
+                &quot;title&quot;: &quot;Design ready&quot;,
+                &quot;status&quot;: &quot;in_progress&quot;,
+                &quot;position&quot;: 2,
+                &quot;due_date&quot;: &quot;2026-06-20&quot;,
+                &quot;completed_at&quot;: null,
+                &quot;total_tasks&quot;: 6,
+                &quot;completed_tasks&quot;: 1,
+                &quot;completion_rate&quot;: 0.1667
+            }
+        ]
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Guest):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403, Not owned by caller):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;This action is unauthorized.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, Project not found):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;No query results for model [App\\Models\\Project].&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-projects--project_id--progress" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-projects--project_id--progress"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-projects--project_id--progress"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-projects--project_id--progress" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-projects--project_id--progress">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-projects--project_id--progress" data-method="GET"
+      data-path="api/projects/{project_id}/progress"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-projects--project_id--progress', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-projects--project_id--progress"
+                    onclick="tryItOut('GETapi-projects--project_id--progress');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-projects--project_id--progress"
+                    onclick="cancelTryOut('GETapi-projects--project_id--progress');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-projects--project_id--progress"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/projects/{project_id}/progress</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-projects--project_id--progress"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-projects--project_id--progress"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>project_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="project_id"                data-endpoint="GETapi-projects--project_id--progress"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the project. Example: <code>1</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>project</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="project"                data-endpoint="GETapi-projects--project_id--progress"
+               value="1"
+               data-component="url">
+    <br>
+<p>The project ID. Example: <code>1</code></p>
+            </div>
+                    </form>
+
                 <h1 id="project-tasks">Project Tasks</h1>
 
     <p>APIs for managing tasks inside a project. The full ownership chain
@@ -4525,7 +5199,7 @@ inside a transaction.</p>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PATCH \
-    "https://api.ops-board.dev.localhost/api/projects/2/tasks/reorder" \
+    "https://api.ops-board.dev.localhost/api/projects/1/tasks/reorder" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -4538,7 +5212,7 @@ inside a transaction.</p>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://api.ops-board.dev.localhost/api/projects/2/tasks/reorder"
+    "https://api.ops-board.dev.localhost/api/projects/1/tasks/reorder"
 );
 
 const headers = {
@@ -4688,10 +5362,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="project_id"                data-endpoint="PATCHapi-projects--project_id--tasks-reorder"
-               value="2"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the project. Example: <code>2</code></p>
+<p>The ID of the project. Example: <code>1</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>project</code></b>&nbsp;&nbsp;
@@ -4739,7 +5413,7 @@ on <code>title</code>.</p>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://api.ops-board.dev.localhost/api/projects/2/tasks?status=in_progress&amp;priority=high&amp;project_milestone_id=4&amp;search=deploy" \
+    --get "https://api.ops-board.dev.localhost/api/projects/1/tasks?status=in_progress&amp;priority=high&amp;project_milestone_id=4&amp;search=deploy" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -4751,7 +5425,7 @@ on <code>title</code>.</p>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://api.ops-board.dev.localhost/api/projects/2/tasks"
+    "https://api.ops-board.dev.localhost/api/projects/1/tasks"
 );
 
 const params = {
@@ -4913,10 +5587,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="project_id"                data-endpoint="GETapi-projects--project_id--tasks"
-               value="2"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the project. Example: <code>2</code></p>
+<p>The ID of the project. Example: <code>1</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>project</code></b>&nbsp;&nbsp;
@@ -5047,7 +5721,7 @@ must belong to the <strong>same</strong> project.</p>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://api.ops-board.dev.localhost/api/projects/2/tasks" \
+    "https://api.ops-board.dev.localhost/api/projects/1/tasks" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -5062,7 +5736,7 @@ must belong to the <strong>same</strong> project.</p>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://api.ops-board.dev.localhost/api/projects/2/tasks"
+    "https://api.ops-board.dev.localhost/api/projects/1/tasks"
 );
 
 const headers = {
@@ -5212,10 +5886,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="project_id"                data-endpoint="POSTapi-projects--project_id--tasks"
-               value="2"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the project. Example: <code>2</code></p>
+<p>The ID of the project. Example: <code>1</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>project</code></b>&nbsp;&nbsp;
@@ -5323,14 +5997,14 @@ not belong to the project in the path.</p>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://api.ops-board.dev.localhost/api/projects/2/tasks/16" \
+    --get "https://api.ops-board.dev.localhost/api/projects/1/tasks/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://api.ops-board.dev.localhost/api/projects/2/tasks/16"
+    "https://api.ops-board.dev.localhost/api/projects/1/tasks/1"
 );
 
 const headers = {
@@ -5467,10 +6141,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="project_id"                data-endpoint="GETapi-projects--project_id--tasks--id-"
-               value="2"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the project. Example: <code>2</code></p>
+<p>The ID of the project. Example: <code>1</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
@@ -5479,10 +6153,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="GETapi-projects--project_id--tasks--id-"
-               value="16"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the task. Example: <code>16</code></p>
+<p>The ID of the task. Example: <code>1</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>project</code></b>&nbsp;&nbsp;
@@ -5526,7 +6200,7 @@ clears it. The model handles this automatically. Send
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "https://api.ops-board.dev.localhost/api/projects/2/tasks/16" \
+    "https://api.ops-board.dev.localhost/api/projects/1/tasks/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -5541,7 +6215,7 @@ clears it. The model handles this automatically. Send
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://api.ops-board.dev.localhost/api/projects/2/tasks/16"
+    "https://api.ops-board.dev.localhost/api/projects/1/tasks/1"
 );
 
 const headers = {
@@ -5681,10 +6355,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="project_id"                data-endpoint="PUTapi-projects--project_id--tasks--id-"
-               value="2"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the project. Example: <code>2</code></p>
+<p>The ID of the project. Example: <code>1</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
@@ -5693,10 +6367,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="PUTapi-projects--project_id--tasks--id-"
-               value="16"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the task. Example: <code>16</code></p>
+<p>The ID of the task. Example: <code>1</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>project</code></b>&nbsp;&nbsp;
@@ -5816,14 +6490,14 @@ create call handles ordering correctly.</p>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "https://api.ops-board.dev.localhost/api/projects/2/tasks/16" \
+    "https://api.ops-board.dev.localhost/api/projects/1/tasks/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://api.ops-board.dev.localhost/api/projects/2/tasks/16"
+    "https://api.ops-board.dev.localhost/api/projects/1/tasks/1"
 );
 
 const headers = {
@@ -5935,10 +6609,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="project_id"                data-endpoint="DELETEapi-projects--project_id--tasks--id-"
-               value="2"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the project. Example: <code>2</code></p>
+<p>The ID of the project. Example: <code>1</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
@@ -5947,10 +6621,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="DELETEapi-projects--project_id--tasks--id-"
-               value="16"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the task. Example: <code>16</code></p>
+<p>The ID of the task. Example: <code>1</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>project</code></b>&nbsp;&nbsp;
