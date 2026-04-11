@@ -25,6 +25,20 @@ it('generates the Scribe documentation for the customer auth endpoints', functio
         ->toContain('api/login')
         ->toContain('api/logout')
         ->toContain('api/me');
+
+    // Project Milestones live in their own group file; assert that all
+    // milestone endpoints surfaced and the dedicated group is documented.
+    $endpointFiles = File::files(base_path('.scribe/endpoints'));
+    $milestonesYaml = collect($endpointFiles)
+        ->map(fn ($file): string => File::get($file->getPathname()))
+        ->first(fn (string $contents): bool => str_contains($contents, 'Project Milestones'));
+
+    expect($milestonesYaml)
+        ->not->toBeNull()
+        ->and($milestonesYaml)
+        ->toContain('api/projects/{project_id}/milestones')
+        ->toContain('api/projects/{project_id}/milestones/{id}')
+        ->toContain('api/projects/{project_id}/milestones/reorder');
 })->skip(
     ! extension_loaded('dom'),
     'Scribe requires the DOM extension.',

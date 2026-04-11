@@ -129,6 +129,31 @@
                             </li>
                                                                         </ul>
                             </ul>
+                    <ul id="tocify-header-project-milestones" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="project-milestones">
+                    <a href="#project-milestones">Project Milestones</a>
+                </li>
+                                    <ul id="tocify-subheader-project-milestones" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="project-milestones-PATCHapi-projects--project_id--milestones-reorder">
+                                <a href="#project-milestones-PATCHapi-projects--project_id--milestones-reorder">Reorder milestones.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="project-milestones-GETapi-projects--project_id--milestones">
+                                <a href="#project-milestones-GETapi-projects--project_id--milestones">List milestones for a project.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="project-milestones-POSTapi-projects--project_id--milestones">
+                                <a href="#project-milestones-POSTapi-projects--project_id--milestones">Create a milestone.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="project-milestones-GETapi-projects--project_id--milestones--id-">
+                                <a href="#project-milestones-GETapi-projects--project_id--milestones--id-">Show a milestone.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="project-milestones-PUTapi-projects--project_id--milestones--id-">
+                                <a href="#project-milestones-PUTapi-projects--project_id--milestones--id-">Update a milestone.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="project-milestones-DELETEapi-projects--project_id--milestones--id-">
+                                <a href="#project-milestones-DELETEapi-projects--project_id--milestones--id-">Delete a milestone.</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
             </div>
 
     <ul class="toc-footer" id="toc-footer">
@@ -630,14 +655,14 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://api.ops-board.dev.localhost/api/clients/16" \
+    --get "https://api.ops-board.dev.localhost/api/clients/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://api.ops-board.dev.localhost/api/clients/16"
+    "https://api.ops-board.dev.localhost/api/clients/1"
 );
 
 const headers = {
@@ -772,10 +797,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="GETapi-clients--id-"
-               value="16"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the client. Example: <code>16</code></p>
+<p>The ID of the client. Example: <code>1</code></p>
             </div>
                     </form>
 
@@ -793,7 +818,7 @@ must be provided (PUT semantics); partial updates are also accepted via PATCH.</
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "https://api.ops-board.dev.localhost/api/clients/16" \
+    "https://api.ops-board.dev.localhost/api/clients/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -809,7 +834,7 @@ must be provided (PUT semantics); partial updates are also accepted via PATCH.</
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://api.ops-board.dev.localhost/api/clients/16"
+    "https://api.ops-board.dev.localhost/api/clients/1"
 );
 
 const headers = {
@@ -948,10 +973,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="PUTapi-clients--id-"
-               value="16"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the client. Example: <code>16</code></p>
+<p>The ID of the client. Example: <code>1</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -1043,14 +1068,14 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "https://api.ops-board.dev.localhost/api/clients/16" \
+    "https://api.ops-board.dev.localhost/api/clients/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://api.ops-board.dev.localhost/api/clients/16"
+    "https://api.ops-board.dev.localhost/api/clients/1"
 );
 
 const headers = {
@@ -1162,10 +1187,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="DELETEapi-clients--id-"
-               value="16"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the client. Example: <code>16</code></p>
+<p>The ID of the client. Example: <code>1</code></p>
             </div>
                     </form>
 
@@ -2483,14 +2508,14 @@ customer's clients, including a minimal client summary.</p>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://api.ops-board.dev.localhost/api/projects/16" \
+    --get "https://api.ops-board.dev.localhost/api/projects/2" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://api.ops-board.dev.localhost/api/projects/16"
+    "https://api.ops-board.dev.localhost/api/projects/2"
 );
 
 const headers = {
@@ -2634,10 +2659,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="GETapi-projects--id-"
-               value="16"
+               value="2"
                data-component="url">
     <br>
-<p>The ID of the project. Example: <code>16</code></p>
+<p>The ID of the project. Example: <code>2</code></p>
             </div>
                     </form>
 
@@ -2656,7 +2681,7 @@ blocked at validation time (422), not at the policy layer.</p>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "https://api.ops-board.dev.localhost/api/projects/16" \
+    "https://api.ops-board.dev.localhost/api/projects/2" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -2677,7 +2702,7 @@ blocked at validation time (422), not at the policy layer.</p>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://api.ops-board.dev.localhost/api/projects/16"
+    "https://api.ops-board.dev.localhost/api/projects/2"
 );
 
 const headers = {
@@ -2844,10 +2869,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="PUTapi-projects--id-"
-               value="16"
+               value="2"
                data-component="url">
     <br>
-<p>The ID of the project. Example: <code>16</code></p>
+<p>The ID of the project. Example: <code>2</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -3004,14 +3029,14 @@ customer's clients.</p>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "https://api.ops-board.dev.localhost/api/projects/16" \
+    "https://api.ops-board.dev.localhost/api/projects/2" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://api.ops-board.dev.localhost/api/projects/16"
+    "https://api.ops-board.dev.localhost/api/projects/2"
 );
 
 const headers = {
@@ -3123,10 +3148,1327 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="DELETEapi-projects--id-"
+               value="2"
+               data-component="url">
+    <br>
+<p>The ID of the project. Example: <code>2</code></p>
+            </div>
+                    </form>
+
+                <h1 id="project-milestones">Project Milestones</h1>
+
+    <p>APIs for managing milestones inside a project. The full ownership chain
+<code>Customer → Client → Project → ProjectMilestone</code> is enforced on every
+endpoint: a customer can only ever see and mutate milestones whose parent
+project they own through one of their clients.</p>
+<p>Routes are nested under <code>/api/projects/{project}/milestones</code> so that
+Laravel's scoped route binding rejects URLs whose milestone does not belong
+to the project in the path with a 404, preventing existence leaks across
+customers.</p>
+
+                                <h2 id="project-milestones-PATCHapi-projects--project_id--milestones-reorder">Reorder milestones.</h2>
+
+<p>
+</p>
+
+<p>Sets the order of milestones in a project. The provided list must contain
+<strong>exactly</strong> the IDs of the project's current milestones (no missing, no
+extras), in the desired final order. Positions are reassigned <code>1..N</code>
+inside a transaction.</p>
+
+<span id="example-requests-PATCHapi-projects--project_id--milestones-reorder">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PATCH \
+    "https://api.ops-board.dev.localhost/api/projects/2/milestones/reorder" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"milestone_ids\": [
+        16
+    ]
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://api.ops-board.dev.localhost/api/projects/2/milestones/reorder"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "milestone_ids": [
+        16
+    ]
+};
+
+fetch(url, {
+    method: "PATCH",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-PATCHapi-projects--project_id--milestones-reorder">
+            <blockquote>
+            <p>Example response (200, Reordered):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 4,
+            &quot;position&quot;: 1,
+            &quot;title&quot;: &quot;Discovery&quot;,
+            &quot;status&quot;: &quot;done&quot;,
+            &quot;project_id&quot;: 1,
+            &quot;description&quot;: null,
+            &quot;due_date&quot;: null,
+            &quot;completed_at&quot;: &quot;2026-05-14T16:30:00+00:00&quot;,
+            &quot;created_at&quot;: &quot;2026-04-11T09:00:00+00:00&quot;,
+            &quot;updated_at&quot;: &quot;2026-05-14T16:30:00+00:00&quot;
+        },
+        {
+            &quot;id&quot;: 1,
+            &quot;position&quot;: 2,
+            &quot;title&quot;: &quot;Design ready&quot;,
+            &quot;status&quot;: &quot;in_progress&quot;,
+            &quot;project_id&quot;: 1,
+            &quot;description&quot;: null,
+            &quot;due_date&quot;: null,
+            &quot;completed_at&quot;: null,
+            &quot;created_at&quot;: &quot;2026-04-11T09:00:00+00:00&quot;,
+            &quot;updated_at&quot;: &quot;2026-04-11T09:00:00+00:00&quot;
+        }
+    ]
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403, Project not owned by caller):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;This action is unauthorized.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422, Incomplete list):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;The milestone_ids list must contain exactly 4 entries (one per existing milestone).&quot;,
+    &quot;errors&quot;: {
+        &quot;milestone_ids&quot;: [
+            &quot;The milestone_ids list must contain exactly 4 entries (one per existing milestone).&quot;
+        ]
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-PATCHapi-projects--project_id--milestones-reorder" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PATCHapi-projects--project_id--milestones-reorder"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PATCHapi-projects--project_id--milestones-reorder"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PATCHapi-projects--project_id--milestones-reorder" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PATCHapi-projects--project_id--milestones-reorder">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PATCHapi-projects--project_id--milestones-reorder" data-method="PATCH"
+      data-path="api/projects/{project_id}/milestones/reorder"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PATCHapi-projects--project_id--milestones-reorder', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PATCHapi-projects--project_id--milestones-reorder"
+                    onclick="tryItOut('PATCHapi-projects--project_id--milestones-reorder');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PATCHapi-projects--project_id--milestones-reorder"
+                    onclick="cancelTryOut('PATCHapi-projects--project_id--milestones-reorder');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PATCHapi-projects--project_id--milestones-reorder"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-purple">PATCH</small>
+            <b><code>api/projects/{project_id}/milestones/reorder</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PATCHapi-projects--project_id--milestones-reorder"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="PATCHapi-projects--project_id--milestones-reorder"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>project_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="project_id"                data-endpoint="PATCHapi-projects--project_id--milestones-reorder"
+               value="2"
+               data-component="url">
+    <br>
+<p>The ID of the project. Example: <code>2</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>project</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="project"                data-endpoint="PATCHapi-projects--project_id--milestones-reorder"
+               value="1"
+               data-component="url">
+    <br>
+<p>The project ID. Example: <code>1</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>milestone_ids</code></b>&nbsp;&nbsp;
+<small>integer[]</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="milestone_ids[0]"                data-endpoint="PATCHapi-projects--project_id--milestones-reorder"
+               data-component="body">
+        <input type="number" style="display: none"
+               name="milestone_ids[1]"                data-endpoint="PATCHapi-projects--project_id--milestones-reorder"
+               data-component="body">
+    <br>
+
+        </div>
+        </form>
+
+                    <h2 id="project-milestones-GETapi-projects--project_id--milestones">List milestones for a project.</h2>
+
+<p>
+</p>
+
+<p>Returns the full ordered roadmap of a project. Pagination is intentionally
+omitted: roadmaps are small (typically 5–30 items) and consumers want the
+whole list at once. Results are ordered by <code>position</code>.</p>
+
+<span id="example-requests-GETapi-projects--project_id--milestones">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://api.ops-board.dev.localhost/api/projects/2/milestones" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://api.ops-board.dev.localhost/api/projects/2/milestones"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-projects--project_id--milestones">
+            <blockquote>
+            <p>Example response (200, OK):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;project_id&quot;: 1,
+            &quot;title&quot;: &quot;Discovery&quot;,
+            &quot;description&quot;: &quot;Stakeholder interviews and scoping.&quot;,
+            &quot;status&quot;: &quot;done&quot;,
+            &quot;position&quot;: 1,
+            &quot;due_date&quot;: &quot;2026-05-15&quot;,
+            &quot;completed_at&quot;: &quot;2026-05-14T16:30:00+00:00&quot;,
+            &quot;created_at&quot;: &quot;2026-04-11T09:00:00+00:00&quot;,
+            &quot;updated_at&quot;: &quot;2026-05-14T16:30:00+00:00&quot;
+        },
+        {
+            &quot;id&quot;: 2,
+            &quot;project_id&quot;: 1,
+            &quot;title&quot;: &quot;Design ready&quot;,
+            &quot;description&quot;: null,
+            &quot;status&quot;: &quot;in_progress&quot;,
+            &quot;position&quot;: 2,
+            &quot;due_date&quot;: &quot;2026-06-20&quot;,
+            &quot;completed_at&quot;: null,
+            &quot;created_at&quot;: &quot;2026-04-11T09:00:00+00:00&quot;,
+            &quot;updated_at&quot;: &quot;2026-04-11T09:00:00+00:00&quot;
+        }
+    ]
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Guest):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403, Project not owned by caller):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;This action is unauthorized.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, Project not found):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;No query results for model [App\\Models\\Project].&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-projects--project_id--milestones" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-projects--project_id--milestones"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-projects--project_id--milestones"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-projects--project_id--milestones" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-projects--project_id--milestones">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-projects--project_id--milestones" data-method="GET"
+      data-path="api/projects/{project_id}/milestones"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-projects--project_id--milestones', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-projects--project_id--milestones"
+                    onclick="tryItOut('GETapi-projects--project_id--milestones');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-projects--project_id--milestones"
+                    onclick="cancelTryOut('GETapi-projects--project_id--milestones');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-projects--project_id--milestones"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/projects/{project_id}/milestones</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-projects--project_id--milestones"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-projects--project_id--milestones"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>project_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="project_id"                data-endpoint="GETapi-projects--project_id--milestones"
+               value="2"
+               data-component="url">
+    <br>
+<p>The ID of the project. Example: <code>2</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>project</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="project"                data-endpoint="GETapi-projects--project_id--milestones"
+               value="1"
+               data-component="url">
+    <br>
+<p>The project ID. Example: <code>1</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="project-milestones-POSTapi-projects--project_id--milestones">Create a milestone.</h2>
+
+<p>
+</p>
+
+<p>Adds a new milestone to a project owned by the authenticated customer.
+The <code>position</code> is auto-assigned (max+1 within the project) and is not
+settable from the payload. Setting <code>status</code> to <code>done</code> immediately stamps
+<code>completed_at</code>.</p>
+
+<span id="example-requests-POSTapi-projects--project_id--milestones">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "https://api.ops-board.dev.localhost/api/projects/2/milestones" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"title\": \"Design ready\",
+    \"description\": \"All wireframes signed off by stakeholders.\",
+    \"status\": \"pending\",
+    \"due_date\": \"2026-06-15\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://api.ops-board.dev.localhost/api/projects/2/milestones"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "title": "Design ready",
+    "description": "All wireframes signed off by stakeholders.",
+    "status": "pending",
+    "due_date": "2026-06-15"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-projects--project_id--milestones">
+            <blockquote>
+            <p>Example response (201, Created):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: {
+        &quot;id&quot;: 3,
+        &quot;project_id&quot;: 1,
+        &quot;title&quot;: &quot;Client UAT&quot;,
+        &quot;description&quot;: null,
+        &quot;status&quot;: &quot;pending&quot;,
+        &quot;position&quot;: 3,
+        &quot;due_date&quot;: &quot;2026-08-01&quot;,
+        &quot;completed_at&quot;: null,
+        &quot;created_at&quot;: &quot;2026-04-11T09:00:00+00:00&quot;,
+        &quot;updated_at&quot;: &quot;2026-04-11T09:00:00+00:00&quot;
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403, Project not owned by caller):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;This action is unauthorized.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422, Validation failed):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;The title field is required.&quot;,
+    &quot;errors&quot;: {
+        &quot;title&quot;: [
+            &quot;The title field is required.&quot;
+        ]
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-projects--project_id--milestones" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-projects--project_id--milestones"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-projects--project_id--milestones"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-projects--project_id--milestones" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-projects--project_id--milestones">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-projects--project_id--milestones" data-method="POST"
+      data-path="api/projects/{project_id}/milestones"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-projects--project_id--milestones', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-projects--project_id--milestones"
+                    onclick="tryItOut('POSTapi-projects--project_id--milestones');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-projects--project_id--milestones"
+                    onclick="cancelTryOut('POSTapi-projects--project_id--milestones');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-projects--project_id--milestones"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/projects/{project_id}/milestones</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-projects--project_id--milestones"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-projects--project_id--milestones"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>project_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="project_id"                data-endpoint="POSTapi-projects--project_id--milestones"
+               value="2"
+               data-component="url">
+    <br>
+<p>The ID of the project. Example: <code>2</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>project</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="project"                data-endpoint="POSTapi-projects--project_id--milestones"
+               value="1"
+               data-component="url">
+    <br>
+<p>The project ID. Example: <code>1</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>title</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="title"                data-endpoint="POSTapi-projects--project_id--milestones"
+               value="Design ready"
+               data-component="body">
+    <br>
+<p>Short label of the milestone (e.g. "Design ready"). Must not be greater than 255 characters. Example: <code>Design ready</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>description</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="description"                data-endpoint="POSTapi-projects--project_id--milestones"
+               value="All wireframes signed off by stakeholders."
+               data-component="body">
+    <br>
+<p>Optional long-form details about the milestone. Must not be greater than 5000 characters. Example: <code>All wireframes signed off by stakeholders.</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>status</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="status"                data-endpoint="POSTapi-projects--project_id--milestones"
+               value="pending"
+               data-component="body">
+    <br>
+<p>Milestone status. One of <code>pending</code>, <code>in_progress</code>, <code>done</code>. Example: <code>pending</code></p>
+Must be one of:
+<ul style="list-style-type: square;"><li><code>pending</code></li> <li><code>in_progress</code></li> <li><code>done</code></li></ul>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>due_date</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="due_date"                data-endpoint="POSTapi-projects--project_id--milestones"
+               value="2026-06-15"
+               data-component="body">
+    <br>
+<p>Optional target date (ISO 8601 date). Must be a valid date. Example: <code>2026-06-15</code></p>
+        </div>
+        </form>
+
+                    <h2 id="project-milestones-GETapi-projects--project_id--milestones--id-">Show a milestone.</h2>
+
+<p>
+</p>
+
+<p>Returns a single milestone. The route binding is scoped, so the URL
+<code>/api/projects/{project}/milestones/{milestone}</code> returns 404 if the
+milestone does not belong to the project in the path.</p>
+
+<span id="example-requests-GETapi-projects--project_id--milestones--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://api.ops-board.dev.localhost/api/projects/2/milestones/16" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://api.ops-board.dev.localhost/api/projects/2/milestones/16"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-projects--project_id--milestones--id-">
+            <blockquote>
+            <p>Example response (200, OK):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: {
+        &quot;id&quot;: 2,
+        &quot;project_id&quot;: 1,
+        &quot;title&quot;: &quot;Design ready&quot;,
+        &quot;description&quot;: null,
+        &quot;status&quot;: &quot;in_progress&quot;,
+        &quot;position&quot;: 2,
+        &quot;due_date&quot;: &quot;2026-06-20&quot;,
+        &quot;completed_at&quot;: null,
+        &quot;created_at&quot;: &quot;2026-04-11T09:00:00+00:00&quot;,
+        &quot;updated_at&quot;: &quot;2026-04-11T09:00:00+00:00&quot;
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403, Not owned by caller):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;This action is unauthorized.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, Milestone not found in this project):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;No query results for model [App\\Models\\ProjectMilestone].&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-projects--project_id--milestones--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-projects--project_id--milestones--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-projects--project_id--milestones--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-projects--project_id--milestones--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-projects--project_id--milestones--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-projects--project_id--milestones--id-" data-method="GET"
+      data-path="api/projects/{project_id}/milestones/{id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-projects--project_id--milestones--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-projects--project_id--milestones--id-"
+                    onclick="tryItOut('GETapi-projects--project_id--milestones--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-projects--project_id--milestones--id-"
+                    onclick="cancelTryOut('GETapi-projects--project_id--milestones--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-projects--project_id--milestones--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/projects/{project_id}/milestones/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-projects--project_id--milestones--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-projects--project_id--milestones--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>project_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="project_id"                data-endpoint="GETapi-projects--project_id--milestones--id-"
+               value="2"
+               data-component="url">
+    <br>
+<p>The ID of the project. Example: <code>2</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="GETapi-projects--project_id--milestones--id-"
                value="16"
                data-component="url">
     <br>
-<p>The ID of the project. Example: <code>16</code></p>
+<p>The ID of the milestone. Example: <code>16</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>project</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="project"                data-endpoint="GETapi-projects--project_id--milestones--id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The project ID. Example: <code>1</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>milestone</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="milestone"                data-endpoint="GETapi-projects--project_id--milestones--id-"
+               value="2"
+               data-component="url">
+    <br>
+<p>The milestone ID. Example: <code>2</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="project-milestones-PUTapi-projects--project_id--milestones--id-">Update a milestone.</h2>
+
+<p>
+</p>
+
+<p>Updates a milestone owned by the authenticated customer. Transitioning
+<code>status</code> to <code>done</code> stamps <code>completed_at</code>; transitioning away from <code>done</code>
+clears it. The model handles this automatically.</p>
+
+<span id="example-requests-PUTapi-projects--project_id--milestones--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PUT \
+    "https://api.ops-board.dev.localhost/api/projects/2/milestones/16" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"title\": \"Design ready\",
+    \"description\": \"All wireframes signed off by stakeholders.\",
+    \"status\": \"in_progress\",
+    \"due_date\": \"2026-06-15\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://api.ops-board.dev.localhost/api/projects/2/milestones/16"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "title": "Design ready",
+    "description": "All wireframes signed off by stakeholders.",
+    "status": "in_progress",
+    "due_date": "2026-06-15"
+};
+
+fetch(url, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-PUTapi-projects--project_id--milestones--id-">
+            <blockquote>
+            <p>Example response (200, Updated):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: {
+        &quot;id&quot;: 2,
+        &quot;project_id&quot;: 1,
+        &quot;title&quot;: &quot;Design ready&quot;,
+        &quot;description&quot;: &quot;Sign-off from all stakeholders.&quot;,
+        &quot;status&quot;: &quot;done&quot;,
+        &quot;position&quot;: 2,
+        &quot;due_date&quot;: &quot;2026-06-20&quot;,
+        &quot;completed_at&quot;: &quot;2026-06-19T17:00:00+00:00&quot;,
+        &quot;created_at&quot;: &quot;2026-04-11T09:00:00+00:00&quot;,
+        &quot;updated_at&quot;: &quot;2026-06-19T17:00:00+00:00&quot;
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403, Not owned by caller):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;This action is unauthorized.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-PUTapi-projects--project_id--milestones--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PUTapi-projects--project_id--milestones--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-projects--project_id--milestones--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PUTapi-projects--project_id--milestones--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-projects--project_id--milestones--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PUTapi-projects--project_id--milestones--id-" data-method="PUT"
+      data-path="api/projects/{project_id}/milestones/{id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PUTapi-projects--project_id--milestones--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PUTapi-projects--project_id--milestones--id-"
+                    onclick="tryItOut('PUTapi-projects--project_id--milestones--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PUTapi-projects--project_id--milestones--id-"
+                    onclick="cancelTryOut('PUTapi-projects--project_id--milestones--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PUTapi-projects--project_id--milestones--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-darkblue">PUT</small>
+            <b><code>api/projects/{project_id}/milestones/{id}</code></b>
+        </p>
+            <p>
+            <small class="badge badge-purple">PATCH</small>
+            <b><code>api/projects/{project_id}/milestones/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PUTapi-projects--project_id--milestones--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="PUTapi-projects--project_id--milestones--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>project_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="project_id"                data-endpoint="PUTapi-projects--project_id--milestones--id-"
+               value="2"
+               data-component="url">
+    <br>
+<p>The ID of the project. Example: <code>2</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="PUTapi-projects--project_id--milestones--id-"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the milestone. Example: <code>16</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>project</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="project"                data-endpoint="PUTapi-projects--project_id--milestones--id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The project ID. Example: <code>1</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>milestone</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="milestone"                data-endpoint="PUTapi-projects--project_id--milestones--id-"
+               value="2"
+               data-component="url">
+    <br>
+<p>The milestone ID. Example: <code>2</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>title</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="title"                data-endpoint="PUTapi-projects--project_id--milestones--id-"
+               value="Design ready"
+               data-component="body">
+    <br>
+<p>Short label of the milestone. Must not be greater than 255 characters. Example: <code>Design ready</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>description</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="description"                data-endpoint="PUTapi-projects--project_id--milestones--id-"
+               value="All wireframes signed off by stakeholders."
+               data-component="body">
+    <br>
+<p>Optional long-form details. Must not be greater than 5000 characters. Example: <code>All wireframes signed off by stakeholders.</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>status</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="status"                data-endpoint="PUTapi-projects--project_id--milestones--id-"
+               value="in_progress"
+               data-component="body">
+    <br>
+<p>Milestone status. One of <code>pending</code>, <code>in_progress</code>, <code>done</code>. Setting it to <code>done</code> automatically stamps <code>completed_at</code>; moving back to another status clears it. Example: <code>in_progress</code></p>
+Must be one of:
+<ul style="list-style-type: square;"><li><code>pending</code></li> <li><code>in_progress</code></li> <li><code>done</code></li></ul>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>due_date</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="due_date"                data-endpoint="PUTapi-projects--project_id--milestones--id-"
+               value="2026-06-15"
+               data-component="body">
+    <br>
+<p>Optional target date (ISO 8601 date). Must be a valid date. Example: <code>2026-06-15</code></p>
+        </div>
+        </form>
+
+                    <h2 id="project-milestones-DELETEapi-projects--project_id--milestones--id-">Delete a milestone.</h2>
+
+<p>
+</p>
+
+<p>Permanently deletes a milestone from a project owned by the authenticated
+customer. Existing positions are not compacted; the next reorder or
+create call handles ordering correctly.</p>
+
+<span id="example-requests-DELETEapi-projects--project_id--milestones--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request DELETE \
+    "https://api.ops-board.dev.localhost/api/projects/2/milestones/16" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://api.ops-board.dev.localhost/api/projects/2/milestones/16"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-projects--project_id--milestones--id-">
+            <blockquote>
+            <p>Example response (204, Deleted):</p>
+        </blockquote>
+                <pre>
+<code>Empty response</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403, Not owned by caller):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;This action is unauthorized.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-DELETEapi-projects--project_id--milestones--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-projects--project_id--milestones--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-projects--project_id--milestones--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-projects--project_id--milestones--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-projects--project_id--milestones--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-DELETEapi-projects--project_id--milestones--id-" data-method="DELETE"
+      data-path="api/projects/{project_id}/milestones/{id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-projects--project_id--milestones--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-projects--project_id--milestones--id-"
+                    onclick="tryItOut('DELETEapi-projects--project_id--milestones--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-projects--project_id--milestones--id-"
+                    onclick="cancelTryOut('DELETEapi-projects--project_id--milestones--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-projects--project_id--milestones--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/projects/{project_id}/milestones/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="DELETEapi-projects--project_id--milestones--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="DELETEapi-projects--project_id--milestones--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>project_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="project_id"                data-endpoint="DELETEapi-projects--project_id--milestones--id-"
+               value="2"
+               data-component="url">
+    <br>
+<p>The ID of the project. Example: <code>2</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="DELETEapi-projects--project_id--milestones--id-"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the milestone. Example: <code>16</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>project</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="project"                data-endpoint="DELETEapi-projects--project_id--milestones--id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The project ID. Example: <code>1</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>milestone</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="milestone"                data-endpoint="DELETEapi-projects--project_id--milestones--id-"
+               value="2"
+               data-component="url">
+    <br>
+<p>The milestone ID. Example: <code>2</code></p>
             </div>
                     </form>
 
