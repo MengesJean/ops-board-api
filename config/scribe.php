@@ -7,6 +7,12 @@ use Knuckles\Scribe\Extracting\Strategies;
 use function Knuckles\Scribe\Config\configureStrategy;
 use function Knuckles\Scribe\Config\removeStrategies;
 
+// Scribe is a dev-only dependency. In production (composer install --no-dev),
+// its classes aren't autoloaded, so bail out before referencing them.
+if (! class_exists(AuthIn::class)) {
+    return [];
+}
+
 // Only the most common configs are shown. See the https://scribe.knuckles.wtf/laravel/reference/config for all.
 
 return [
