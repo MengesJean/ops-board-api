@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Projects;
 
+use App\Enums\TaskStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Project\IndexProjectRequest;
 use App\Http\Requests\Project\StoreProjectRequest;
@@ -9,6 +10,7 @@ use App\Http\Requests\Project\UpdateProjectRequest;
 use App\Http\Resources\Project\ProjectResource;
 use App\Models\Customer;
 use App\Models\Project;
+use App\Services\ProjectProgressService;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -78,6 +80,10 @@ class ProjectController extends Controller
         // overlapping column names (name, status, created_at, ...).
         $projects = $customer->projects()
             ->with('client')
+            ->withCount([
+                'tasks',
+                'tasks as completed_tasks_count' => fn ($q) => $q->where('status', TaskStatus::Done->value),
+            ])
             ->when($request->string('search')->toString(), function ($query, string $search): void {
                 $needle = '%'.strtolower($search).'%';
                 $query->where(function ($inner) use ($needle): void {
@@ -166,11 +172,17 @@ class ProjectController extends Controller
      * @response 403 scenario="Not owned by caller" {"message": "This action is unauthorized."}
      * @response 404 scenario="Project not found" {"message": "No query results for model [App\\Models\\Project]."}
      */
-    public function show(Project $project): ProjectResource
+    public function show(Project $project, ProjectProgressService $progress): ProjectResource
     {
         $this->authorize('view', $project);
 
-        return ProjectResource::make($project->load('client'));
+        $project->load('client');
+        $project->loadCount([
+            'tasks',
+            'tasks as completed_tasks_count' => fn ($q) => $q->where('status', TaskStatus::Done->value),
+        ]);
+
+        return ProjectResource::make($project)->withProgress($progress->forProject($project));
     }
 
     /**
