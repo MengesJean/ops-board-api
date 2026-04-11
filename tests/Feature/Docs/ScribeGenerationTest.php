@@ -39,6 +39,19 @@ it('generates the Scribe documentation for the customer auth endpoints', functio
         ->toContain('api/projects/{project_id}/milestones')
         ->toContain('api/projects/{project_id}/milestones/{id}')
         ->toContain('api/projects/{project_id}/milestones/reorder');
+
+    // Project Tasks live in their own group file; assert that all task
+    // endpoints surfaced and the dedicated group is documented.
+    $tasksYaml = collect($endpointFiles)
+        ->map(fn ($file): string => File::get($file->getPathname()))
+        ->first(fn (string $contents): bool => str_contains($contents, 'Project Tasks'));
+
+    expect($tasksYaml)
+        ->not->toBeNull()
+        ->and($tasksYaml)
+        ->toContain('api/projects/{project_id}/tasks')
+        ->toContain('api/projects/{project_id}/tasks/{id}')
+        ->toContain('api/projects/{project_id}/tasks/reorder');
 })->skip(
     ! extension_loaded('dom'),
     'Scribe requires the DOM extension.',
