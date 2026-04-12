@@ -4,6 +4,8 @@
 > Ce dépôt fait partie d'un projet vitrine construit pour mon portfolio personnel : **[www.mengesjean.fr](https://www.mengesjean.fr)**.
 > Il n'est ni audité, ni durci pour un environnement de production. Il sert à illustrer une stack et des choix d'architecture côté back-end Laravel — rien de plus.
 
+> 🔗 **Repo front** : [github.com/MengesJean/ops-board-app](https://github.com/MengesJean/ops-board-app) — interface Next.js 16 qui consomme cette API.
+
 ---
 
 Backend Laravel 12 du projet **Ops Board**, une application de gestion de portefeuille projets / clients / tâches.
